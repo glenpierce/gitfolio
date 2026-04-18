@@ -153,7 +153,10 @@ export default function Home() {
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent group-hover:animate-shimmer" />
               </Link>
               <div className="flex items-center gap-3 border border-fuchsia-500/20 bg-fuchsia-950/10 px-4 py-3 text-xs tracking-widest text-fuchsia-200/80 uppercase">
-                <span>{sortedArticles.length.toString().padStart(2, "0")} ARTICLE</span>
+                <span>
+                  {sortedArticles.length.toString().padStart(2, "0")}{" "}
+                  {sortedArticles.length === 1 ? "ARTICLE" : "ARTICLES"}
+                </span>
                 <span className="text-fuchsia-500">|</span>
                 <span>{topics.length.toString().padStart(2, "0")} TOPICS</span>
               </div>
