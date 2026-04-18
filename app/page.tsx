@@ -190,7 +190,7 @@ export default function Home() {
         <section id="articles" className="space-y-12 py-20">
           <div className="flex items-end justify-between border-b border-cyan-900/30 pb-4">
             <h2 className="text-2xl font-bold tracking-widest text-fuchsia-400 drop-shadow-[0_0_8px_rgba(232,121,249,0.6)]">
-              // ARTICLE_INDEX
+              {"// ARTICLE_INDEX"}
             </h2>
             <span className="text-xs text-cyan-700">Chronologically ordered and ready for future essays</span>
           </div>
@@ -209,7 +209,7 @@ export default function Home() {
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">
-                // FEATURED_ESSAY
+                {"// FEATURED_ESSAY"}
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-cyan-100/65">
                 A long-form note on why architectural rigor becomes more important when AI can rewrite large
@@ -286,7 +286,7 @@ export default function Home() {
         <section id="topics" className="space-y-12 border-t border-cyan-900/30 py-20">
           <div className="flex items-end justify-between border-b border-cyan-900/30 pb-4">
             <h2 className="text-2xl font-bold tracking-widest text-fuchsia-400 drop-shadow-[0_0_8px_rgba(232,121,249,0.6)]">
-              // TOPIC_GRID
+              {"// TOPIC_GRID"}
             </h2>
             <span className="text-xs text-cyan-700">A tagging system that can scale with the archive</span>
           </div>
@@ -311,7 +311,7 @@ export default function Home() {
         <section id="about" className="grid gap-12 border-t border-cyan-900/30 py-20 md:grid-cols-12">
           <div className="space-y-8 md:col-span-4">
             <h2 className="text-2xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">
-              // ABOUT_GLEN
+              {"// ABOUT_GLEN"}
             </h2>
             <div className="group relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-cyan-500/30 bg-cyan-950/30">
               <div className="absolute inset-0 z-10 bg-[linear-gradient(to_bottom,transparent_0%,rgba(5,5,16,0.8)_100%)]" />
@@ -403,7 +403,9 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-2">
           <p className="text-xs font-bold tracking-[0.3em] text-cyan-700 uppercase">
-            {String(index + 1).padStart(2, "0")} // {dateFormatter.format(new Date(article.publishedAt))}
+            {String(index + 1).padStart(2, "0")}
+            {" // "}
+            {dateFormatter.format(new Date(article.publishedAt))}
           </p>
           <h3 className="text-xl font-bold tracking-wider text-white transition-colors group-hover:text-cyan-400">
             {article.title}
