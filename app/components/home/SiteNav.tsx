@@ -8,6 +8,9 @@ export function SiteNav() {
           GLEN PIERCE
         </Link>
         <div className="home-nav-links">
+          <Link href="/webgpu" className="home-nav-link-cyan">
+            DEMO
+          </Link>
           <Link href="#articles" className="home-nav-link-cyan">
             ARTICLES
           </Link>
@@ -19,4 +22,3 @@ export function SiteNav() {
     </nav>
   );
 }
-
