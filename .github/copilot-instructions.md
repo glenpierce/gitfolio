@@ -1,29 +1,3 @@
-# Copilot Instructions for Gitfolio
-
-## Project Overview
-Gitfolio is a **single-page portfolio template** for developers. All user-customizable content lives in `app/page.tsx`. This is a beginner-friendly template—keep changes simple and well-commented.
-
-## Architecture
-
-### Single-File Content Model
-- **`app/page.tsx`** - Contains ALL portfolio content and components (nav, hero, projects, about, contact, footer)
-- Components are defined at bottom of file: `ProjectCard`, `SocialLink`, `ArrowRightIcon`, `ArrowUpRightIcon`
-- No separate component files—intentionally flat for beginner accessibility
-
-### GitHub Pages Deployment Pattern
-This project uses a **dual-environment basePath** pattern for local dev + GitHub Pages:
-
-```tsx
-// In page.tsx - for images
-const basePath = process.env.NODE_ENV === "production" ? "/gfbs3-portfolio-demo" : "";
-src={`${basePath}/me.png`}
-
-// In next.config.ts - for routing
-basePath: isProd ? "/gfbs3-portfolio-demo" : "",
-```
-
-**Critical**: When users fork this repo, they must update the repo name in BOTH files.
-
 ## Design System
 
 ### Color Palette (Tailwind classes)
@@ -41,17 +15,6 @@ className="drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]"
 
 // Box glow on hover  
 className="hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
-```
-
-### ProjectCard Component
-```tsx
-<ProjectCard 
-  title="PROJECT_NAME"      // UPPERCASE_SNAKE_CASE convention
-  description="..."
-  tags={["REACT", "API"]}   // Uppercase tags
-  color="cyan"              // cyan | fuchsia | purple | yellow
-  href="https://..."
-/>
 ```
 
 ## Key Files
