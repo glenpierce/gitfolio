@@ -31,6 +31,7 @@ export default function Home() {
         <HeroSection articleCount={sortedArticles.length} topicCount={topics.length} />
         <ArticlesSection articles={sortedArticles} dateFormatter={dateFormatter} />
         <FeaturedArticleSection article={featuredArticle} dateFormatter={dateFormatter} />
+        <FeaturedArticleSection article={sortedArticles[1]} dateFormatter={dateFormatter} />
         <AboutSection />
       </main>
 
