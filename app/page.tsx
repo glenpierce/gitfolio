@@ -1,7 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-
-const basePath = process.env.NODE_ENV === "production" ? "/gitfolio" : "";
 
 type Article = {
   slug: string;
@@ -106,12 +103,6 @@ export default function Home() {
               ARTICLES
             </Link>
             <Link
-              href="#topics"
-              className="transition-all hover:text-fuchsia-400 hover:drop-shadow-[0_0_5px_rgba(232,121,249,0.8)]"
-            >
-              TOPICS
-            </Link>
-            <Link
               href="#about"
               className="transition-all hover:text-yellow-400 hover:drop-shadow-[0_0_5px_rgba(250,204,21,0.8)]"
             >
@@ -122,7 +113,7 @@ export default function Home() {
       </nav>
 
       <main className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-20">
-        <section className="relative grid gap-12 py-20 md:grid-cols-[1.3fr_0.7fr] md:py-28">
+        <section className="relative py-20 md:py-28">
           <div className="space-y-8">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/20 px-3 py-1 text-xs font-bold tracking-widest text-cyan-400 uppercase animate-pulse">
@@ -162,32 +153,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div className="relative overflow-hidden border border-cyan-500/30 bg-[#0a0a1a] p-6 shadow-[0_0_30px_rgba(34,211,238,0.08)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(232,121,249,0.15),transparent_45%)]" />
-            <div className="relative space-y-6">
-              <div className="flex items-center justify-between border-b border-cyan-900/30 pb-4">
-                <span className="text-xs font-bold tracking-[0.3em] text-cyan-700 uppercase">SIGNAL</span>
-                <span className="text-xs text-cyan-700">{featuredArticle.readTime}</span>
-              </div>
-              <div className="space-y-3">
-                <p className="text-xs font-bold tracking-[0.3em] text-fuchsia-400 uppercase">
-                  {dateFormatter.format(new Date(featuredArticle.publishedAt))}
-                </p>
-                <h2 className="text-2xl font-bold tracking-wide text-white">
-                  {featuredArticle.title}
-                </h2>
-                <p className="text-sm leading-relaxed text-cyan-100/65">
-                  {featuredArticle.summary}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {featuredArticle.tags.map((tag) => (
-                  <TopicPill key={tag} tag={tag} />
-                ))}
-              </div>
-            </div>
-          </div>
         </section>
 
         <section id="articles" className="space-y-12 py-20">
@@ -205,46 +170,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id={featuredArticle.slug}
-          className="grid gap-12 border-t border-cyan-900/30 py-20 md:grid-cols-[0.75fr_1.25fr]"
-        >
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">
-                {"// FEATURED_ESSAY"}
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-cyan-100/65">
-                A long-form note on why architectural rigor becomes more important when AI can rewrite large
-                sections of a system at any time.
-              </p>
-            </div>
-
-            <div className="space-y-4 border border-cyan-500/20 bg-cyan-950/20 p-6">
-              <div className="border-b border-cyan-900/30 pb-4">
-                <p className="text-xs font-bold tracking-[0.3em] text-cyan-700 uppercase">ARTICLE METADATA</p>
-              </div>
-              <div className="space-y-3 text-sm text-cyan-100/75">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-cyan-400">PUBLISHED</span>
-                  <span>{dateFormatter.format(new Date(featuredArticle.publishedAt))}</span>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-cyan-400">READ TIME</span>
-                  <span>{featuredArticle.readTime}</span>
-                </div>
-                <div className="space-y-2 pt-2">
-                  <span className="text-cyan-400">TOPICS</span>
-                  <div className="flex flex-wrap gap-2">
-                    {featuredArticle.tags.map((tag) => (
-                      <TopicPill key={tag} tag={tag} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <section id={featuredArticle.slug} className="border-t border-cyan-900/30 py-20">
           <article className="space-y-8 border border-cyan-900/30 bg-[#0a0a1a] p-8 shadow-[0_0_30px_rgba(34,211,238,0.06)]">
             <header className="space-y-4 border-b border-cyan-900/30 pb-8">
               <p className="text-xs font-bold tracking-[0.3em] text-fuchsia-400 uppercase">
@@ -285,104 +211,27 @@ export default function Home() {
             </div>
           </article>
         </section>
-
-        <section id="topics" className="space-y-12 border-t border-cyan-900/30 py-20">
-          <div className="flex items-end justify-between border-b border-cyan-900/30 pb-4">
-            <h2 className="text-2xl font-bold tracking-widest text-fuchsia-400 drop-shadow-[0_0_8px_rgba(232,121,249,0.6)]">
-              {"// TOPIC_GRID"}
-            </h2>
-            <span className="text-xs text-cyan-700">A tagging system that can scale with the archive</span>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {topics.map((tag) => (
-              <div
-                key={tag}
-                className="border border-cyan-900/30 bg-cyan-950/20 p-5 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
-              >
-                <p className="text-xs font-bold tracking-[0.3em] text-cyan-700 uppercase">TOPIC</p>
-                <h3 className="mt-3 text-lg font-bold tracking-wide text-white">{tag}</h3>
-                <p className="mt-2 text-sm text-cyan-100/60">
-                  {sortedArticles.filter((article) => article.tags.includes(tag)).length} article
-                  {sortedArticles.filter((article) => article.tags.includes(tag)).length === 1 ? "" : "s"}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="about" className="grid gap-12 border-t border-cyan-900/30 py-20 md:grid-cols-12">
-          <div className="space-y-8 md:col-span-4">
+        <section id="about" className="border-t border-cyan-900/30 py-20">
+          <div className="space-y-8">
             <h2 className="text-2xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">
               {"// ABOUT_GLEN"}
             </h2>
-            <div className="group relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-cyan-500/30 bg-cyan-950/30">
-              <div className="absolute inset-0 z-10 bg-[linear-gradient(to_bottom,transparent_0%,rgba(5,5,16,0.8)_100%)]" />
-              <div className="absolute inset-0 z-20 bg-[linear-gradient(to_bottom,rgba(34,211,238,0.05)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none" />
-              <Image
-                src={`${basePath}/me.png`}
-                alt="Glen Pierce"
-                fill
-                className="z-0 object-cover opacity-60 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-              />
-            </div>
-          </div>
-          <div className="space-y-8 text-cyan-100/80 md:col-span-8">
-            <p className="leading-relaxed font-light">
+            <div className="space-y-8 text-cyan-100/80">
+              <p className="leading-relaxed font-light">
               This blog is a running notebook on software architecture, AI-assisted engineering, and the
               practical discipline required to keep systems understandable as they evolve. The emphasis is
               on design choices that improve changeability, testability, and operational clarity.
-            </p>
-            <div className="relative overflow-hidden rounded-sm border border-cyan-500/20 bg-cyan-950/20 p-6">
-              <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-500 via-fuchsia-500 to-cyan-500" />
-              <div className="grid gap-8 font-mono text-sm md:grid-cols-2">
-                <div>
-                  <h3 className="mb-4 border-b border-cyan-800 pb-2 text-xs tracking-widest text-cyan-400 uppercase">
-                    SIGNALS
-                  </h3>
-                  <ul className="space-y-2 text-cyan-200/70">
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Architecture under AI regeneration
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Contracts, constraints, and system boundaries
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Observability, diagnostics, and resilient change
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="mb-4 border-b border-cyan-800 pb-2 text-xs tracking-widest text-cyan-400 uppercase">
-                    OPERATING PRINCIPLES
-                  </h3>
-                  <ul className="space-y-2 text-cyan-200/70">
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Encode design explicitly
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Prefer legibility over cleverness
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-fuchsia-500">›</span> Measure behavior under iteration
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <a
-                href="https://github.com/glenpierce"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-fuchsia-600 px-10 py-4 text-sm font-bold tracking-widest text-white uppercase transition-all duration-300 hover:scale-105 hover:bg-fuchsia-500 hover:shadow-[0_0_30px_rgba(232,121,249,0.6)]"
-              >
-                FOLLOW ON GITHUB
-              </a>
-              <p className="max-w-xl text-sm leading-relaxed text-cyan-200/60">
-                More essays can be added by extending the article data set in this page while keeping the
-                same chronological and tag-driven structure.
               </p>
+              <div className="flex flex-wrap items-center gap-6 pt-2">
+                <a
+                  href="https://github.com/glenpierce"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-fuchsia-600 px-10 py-4 text-sm font-bold tracking-widest text-white uppercase transition-all duration-300 hover:scale-105 hover:bg-fuchsia-500 hover:shadow-[0_0_30px_rgba(232,121,249,0.6)]"
+                >
+                  FOLLOW ON GITHUB
+                </a>
+              </div>
             </div>
           </div>
         </section>
