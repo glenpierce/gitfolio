@@ -81,127 +81,115 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#050510] font-mono text-cyan-50 selection:bg-fuchsia-500/30 selection:text-fuchsia-200">
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1a1a2e_1px,transparent_1px),linear-gradient(to_bottom,#1a1a2e_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
-        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-fuchsia-900/20 to-transparent opacity-30" />
+    <div className="home-page">
+      <div className="home-backdrop">
+        <div className="home-grid-overlay" />
+        <div className="home-fade-overlay" />
       </div>
 
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-cyan-900/30 bg-[#050510]/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link
-            href="/"
-            className="bg-gradient-to-r from-cyan-400 to-fuchsia-400 bg-clip-text text-lg font-bold tracking-widest text-transparent transition-all duration-300 hover:to-cyan-400"
-          >
+      <nav className="home-nav">
+        <div className="home-nav-inner">
+          <Link href="/" className="home-brand-link">
             GLEN PIERCE
           </Link>
-          <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-cyan-700/80">
-            <Link
-              href="#articles"
-              className="transition-all hover:text-cyan-400 hover:drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]"
-            >
+          <div className="home-nav-links">
+            <Link href="#articles" className="home-nav-link-cyan">
               ARTICLES
             </Link>
-            <Link
-              href="#about"
-              className="transition-all hover:text-yellow-400 hover:drop-shadow-[0_0_5px_rgba(250,204,21,0.8)]"
-            >
+            <Link href="#about" className="home-nav-link-yellow">
               ABOUT
             </Link>
           </div>
         </div>
       </nav>
 
-      <main className="relative z-10 mx-auto max-w-6xl px-6 pt-32 pb-20">
-        <section className="relative py-20 md:py-28">
-          <div className="space-y-8">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/20 px-3 py-1 text-xs font-bold tracking-widest text-cyan-400 uppercase animate-pulse">
-                <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,1)]" />
+      <main className="home-main">
+        <section className="home-hero">
+          <div className="home-hero-content">
+            <div className="home-hero-header">
+              <div className="home-live-pill">
+                <span className="home-live-dot" />
                 NEW ARTICLE LIVE
               </div>
-              <h1 className="text-5xl leading-[1.1] font-bold tracking-tighter text-white drop-shadow-[0_0_15px_rgba(34,211,238,0.3)] md:text-7xl">
+              <h1 className="home-hero-title">
                 THOUGHTS ON <br />
-                <span className="animate-gradient-x bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
+                <span className="home-hero-title-gradient">
                   ARCHITECTURE,
                 </span>{" "}
                 <br />
                 AI, AND SYSTEMS
               </h1>
             </div>
-            <p className="max-w-2xl border-l-2 border-fuchsia-500/50 pl-6 text-lg leading-relaxed font-light text-cyan-100/70 md:text-xl">
+            <p className="home-hero-description">
               Glen Pierce on the engineering discipline required to keep AI-assisted software legible,
               testable, and resilient under continuous regeneration.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link
-                href="#articles"
-                className="group relative overflow-hidden border border-cyan-500/50 bg-cyan-950/30 px-8 py-3 text-sm font-bold tracking-widest text-cyan-300 uppercase transition-all hover:bg-cyan-900/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  READ THE LATEST <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <div className="home-hero-actions">
+              <Link href="#articles" className="home-hero-cta">
+                <span className="home-hero-cta-content">
+                  READ THE LATEST <ArrowRightIcon className="home-arrow-right" />
                 </span>
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent group-hover:animate-shimmer" />
+                <div className="home-hero-cta-shimmer" />
               </Link>
-              <div className="flex items-center gap-3 border border-fuchsia-500/20 bg-fuchsia-950/10 px-4 py-3 text-xs tracking-widest text-fuchsia-200/80 uppercase">
+              <div className="home-stats-chip">
                 <span>
                   {sortedArticles.length.toString().padStart(2, "0")}{" "}
                   {sortedArticles.length === 1 ? "ARTICLE" : "ARTICLES"}
                 </span>
-                <span className="text-fuchsia-500">|</span>
+                <span className="home-stats-separator">|</span>
                 <span>{topics.length.toString().padStart(2, "0")} TOPICS</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="articles" className="space-y-12 py-20">
-          <div className="flex items-end justify-between border-b border-cyan-900/30 pb-4">
-            <h2 className="text-2xl font-bold tracking-widest text-fuchsia-400 drop-shadow-[0_0_8px_rgba(232,121,249,0.6)]">
+        <section id="articles" className="home-articles-section">
+          <div className="home-section-header">
+            <h2 className="home-section-title-fuchsia">
               {"// ARTICLE_INDEX"}
             </h2>
-            <span className="text-xs text-cyan-700">Chronologically ordered and ready for future essays</span>
+            <span className="home-section-meta">Chronologically ordered and ready for future essays</span>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="home-articles-grid">
             {sortedArticles.map((article, index) => (
               <ArticleCard key={article.slug} article={article} index={index} />
             ))}
           </div>
         </section>
 
-        <section id={featuredArticle.slug} className="border-t border-cyan-900/30 py-20">
-          <article className="space-y-8 border border-cyan-900/30 bg-[#0a0a1a] p-8 shadow-[0_0_30px_rgba(34,211,238,0.06)]">
-            <header className="space-y-4 border-b border-cyan-900/30 pb-8">
-              <p className="text-xs font-bold tracking-[0.3em] text-fuchsia-400 uppercase">
+        <section id={featuredArticle.slug} className="home-featured-section">
+          <article className="home-featured-article">
+            <header className="home-featured-header">
+              <p className="home-featured-date">
                 {dateFormatter.format(new Date(featuredArticle.publishedAt))}
               </p>
-              <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h3 className="home-featured-title">
                 {featuredArticle.title}
               </h3>
-              <p className="max-w-3xl text-lg leading-relaxed text-cyan-100/70">
+              <p className="home-featured-summary">
                 {featuredArticle.summary}
               </p>
             </header>
 
-            <div className="space-y-6 text-base leading-8 font-light text-cyan-100/85">
+            <div className="home-featured-content">
               {featuredArticle.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
 
-              <div className="border-l-2 border-fuchsia-500/60 bg-fuchsia-950/10 px-6 py-4 text-lg font-medium text-fuchsia-100">
+              <div className="home-featured-keyline">
                 {featuredArticle.keyLine}
               </div>
 
-              <ol className="space-y-5">
+              <ol className="home-metrics-list">
                 {featuredArticle.metrics.map((metric, index) => (
-                  <li key={metric.title} className="grid gap-2 md:grid-cols-[2rem_1fr]">
-                    <span className="text-fuchsia-400">{index + 1}.</span>
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-bold tracking-[0.2em] text-cyan-300 uppercase">
+                  <li key={metric.title} className="home-metric-item">
+                    <span className="home-metric-index">{index + 1}.</span>
+                    <div className="home-metric-copy">
+                      <h4 className="home-metric-title">
                         {metric.title}
                       </h4>
-                      <p className="text-cyan-100/75">{metric.description}</p>
+                      <p className="home-metric-description">{metric.description}</p>
                     </div>
                   </li>
                 ))}
@@ -211,23 +199,23 @@ export default function Home() {
             </div>
           </article>
         </section>
-        <section id="about" className="border-t border-cyan-900/30 py-20">
-          <div className="space-y-8">
-            <h2 className="text-2xl font-bold tracking-widest text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">
+        <section id="about" className="home-about-section">
+          <div className="home-about-content">
+            <h2 className="home-section-title-cyan">
               {"// ABOUT_GLEN"}
             </h2>
-            <div className="space-y-8 text-cyan-100/80">
-              <p className="leading-relaxed font-light">
-              This blog is a running notebook on software architecture, AI-assisted engineering, and the
-              practical discipline required to keep systems understandable as they evolve. The emphasis is
-              on design choices that improve changeability, testability, and operational clarity.
+            <div className="home-about-copy-wrap">
+              <p className="home-about-copy">
+                This blog is a running notebook on software architecture, AI-assisted engineering, and the
+                practical discipline required to keep systems understandable as they evolve. The emphasis is
+                on design choices that improve changeability, testability, and operational clarity.
               </p>
-              <div className="flex flex-wrap items-center gap-6 pt-2">
+              <div className="home-about-actions">
                 <a
                   href="https://github.com/glenpierce"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-fuchsia-600 px-10 py-4 text-sm font-bold tracking-widest text-white uppercase transition-all duration-300 hover:scale-105 hover:bg-fuchsia-500 hover:shadow-[0_0_30px_rgba(232,121,249,0.6)]"
+                  className="home-github-cta"
                 >
                   FOLLOW ON GITHUB
                 </a>
@@ -237,7 +225,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-cyan-900/20 py-8 text-center text-xs text-cyan-900/50">
+      <footer className="home-footer">
         <p>
           Glen Pierce Blog // Architecture, AI, and resilient systems
         </p>
@@ -248,27 +236,24 @@ export default function Home() {
 
 function ArticleCard({ article, index }: { article: Article; index: number }) {
   return (
-    <Link
-      href={`#${article.slug}`}
-      className="group block space-y-4 border border-cyan-900/30 bg-[#0a0a1a] p-6 transition-all duration-300 hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div className="space-y-2">
-          <p className="text-xs font-bold tracking-[0.3em] text-cyan-700 uppercase">
+    <Link href={`#${article.slug}`} className="home-article-card">
+      <div className="home-article-card-header">
+        <div className="home-article-card-copy">
+          <p className="home-article-card-meta">
             {String(index + 1).padStart(2, "0")}
             {" // "}
             {dateFormatter.format(new Date(article.publishedAt))}
           </p>
-          <h3 className="text-xl font-bold tracking-wider text-white transition-colors group-hover:text-cyan-400">
+          <h3 className="home-article-card-title">
             {article.title}
           </h3>
         </div>
-        <ArrowUpRightIcon className="h-5 w-5 text-cyan-700 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-cyan-400" />
+        <ArrowUpRightIcon className="home-article-card-icon" />
       </div>
-      <p className="border-l border-cyan-900/50 pl-4 text-sm leading-relaxed font-light text-cyan-100/60">
+      <p className="home-article-card-summary">
         {article.summary}
       </p>
-      <div className="flex flex-wrap gap-2 pt-2">
+      <div className="home-article-card-tags">
         {article.tags.map((tag) => (
           <TopicPill key={tag} tag={tag} />
         ))}
@@ -279,7 +264,7 @@ function ArticleCard({ article, index }: { article: Article; index: number }) {
 
 function TopicPill({ tag }: { tag: string }) {
   return (
-    <span className="border border-cyan-900/30 bg-cyan-950/30 px-2 py-1 text-[10px] font-bold tracking-widest text-cyan-300 uppercase">
+    <span className="home-topic-pill">
       {tag}
     </span>
   );
