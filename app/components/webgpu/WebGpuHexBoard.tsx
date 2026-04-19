@@ -4,7 +4,20 @@ import { useEffect, useRef, useState } from "react";
 
 const DEFAULT_BPM = 124;
 const MAX_DEVICE_PIXEL_RATIO = 2;
-type NavigatorWithGpu = Navigator & { gpu?: GPU };
+const BUFFER_USAGE_UNIFORM = 0x40;
+const BUFFER_USAGE_COPY_DST = 0x08;
+
+type WebGpuCanvasContext = {
+  configure: (config: { device: any; format: any; alphaMode: string }) => void;
+  getCurrentTexture: () => { createView: () => any };
+};
+
+type NavigatorWithGpu = Navigator & {
+  gpu?: {
+    requestAdapter: () => Promise<any>;
+    getPreferredCanvasFormat: () => any;
+  };
+};
 
 function beatPulse(timeSeconds: number, bpm: number) {
   const beat = (timeSeconds * bpm) / 60;
@@ -27,7 +40,7 @@ export function WebGpuHexBoard() {
       return;
     }
 
-    const gpu = (navigator as NavigatorWithGpu).gpu;
+    const gpu = (window.navigator as NavigatorWithGpu).gpu;
     if (!gpu) {
       setErrorMessage("WebGPU is unavailable in this browser. Try Chrome or Edge with WebGPU enabled.");
       return;
@@ -42,7 +55,7 @@ export function WebGpuHexBoard() {
         }
 
         const device = await adapter.requestDevice();
-        const context = canvas.getContext("webgpu") as GPUCanvasContext | null;
+        const context = canvas.getContext("webgpu") as WebGpuCanvasContext | null;
         if (!context) {
           setErrorMessage("Unable to create a WebGPU canvas context.");
           return;
@@ -53,7 +66,7 @@ export function WebGpuHexBoard() {
         const uniformBuffer = device.createBuffer({
           label: "hex-board-uniforms",
           size: uniformData.byteLength,
-          usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+          usage: BUFFER_USAGE_UNIFORM | BUFFER_USAGE_COPY_DST,
         });
 
         const shaderModule = device.createShaderModule({
