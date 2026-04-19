@@ -46,5 +46,3 @@ export const architecturalPrinciplesAsAiGuardrails: Article = {
   closing:
     "The metric I suspect we will begin to apply will be how the system behaves under iteration. This may actually make software engineering more rigorous, not less. The hand-wavy parts, 'this feels clean', get replaced with things you can actually test and enforce. Do not stop encoding design, because the model 'usually gets it right'.",
 };
-
-
