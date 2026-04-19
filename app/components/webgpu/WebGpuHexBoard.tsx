@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const DEFAULT_BPM = 124;
 const MAX_DEVICE_PIXEL_RATIO = 2;
+type NavigatorWithGpu = Navigator & { gpu?: GPU };
 
 function beatPulse(timeSeconds: number, bpm: number) {
   const beat = (timeSeconds * bpm) / 60;
@@ -26,14 +27,14 @@ export function WebGpuHexBoard() {
       return;
     }
 
-    if (!("gpu" in navigator)) {
+    const gpu = (navigator as NavigatorWithGpu).gpu;
+    if (!gpu) {
       setErrorMessage("WebGPU is unavailable in this browser. Try Chrome or Edge with WebGPU enabled.");
       return;
     }
 
     const init = async () => {
       try {
-        const gpu = navigator.gpu;
         const adapter = await gpu.requestAdapter();
         if (!adapter) {
           setErrorMessage("No compatible GPU adapter found on this device.");
