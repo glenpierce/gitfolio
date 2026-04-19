@@ -1,5 +1,5 @@
 {
-  "name": "gfbs3-portfolio-demo",
+  "name": "blog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,13 +14,14 @@
     "react-dom": "19.2.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
+    "@webgpu/types": "0.1.66",
+    "@tailwindcss/postcss": "4.2.2",
+    "@types/node": "20.11.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.8.0",
     "eslint-config-next": "16.0.10",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "tailwindcss": "4.2.2",
+    "typescript": "5.9.3"
   }
 }

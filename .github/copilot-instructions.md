@@ -30,10 +30,16 @@ className="hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
 
 ## Commands
 ```bash
-npm run dev    # Local development at localhost:3000
-npm run build  # Production build (static export to /out)
-npm run lint   # ESLint check
+docker compose up --build                     # Local development at localhost:3000
+docker compose run --rm app npm run build     # Production build (static export to /out)
+docker compose run --rm app npm run lint      # ESLint check
 ```
+
+## Agent Command Policy
+
+- Agents must run all `npm`, `npx`, and `node` commands via Docker.
+- Use `docker compose run --rm app <command>` for one-off tasks.
+- Do not run Node tooling directly on the host machine.
 
 ## When Helping Users
 

@@ -35,11 +35,18 @@
 
 ---
 
+## 🐳 Local Command Policy
+
+Run all `npm`, `npx`, and `node` commands through Docker. Do not run Node tooling directly on the host machine for local development.
+
+---
+
 ## 📝 Available Scripts
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
+docker compose up --build                               # Start development server at localhost:3000
+docker compose run --rm app npm run build              # Build for production
+docker compose run --rm app npm run start              # Start production server
+docker compose run --rm app npm run lint               # Run ESLint
+docker compose run --rm app npx tsc --noEmit           # Type-check
 ```
